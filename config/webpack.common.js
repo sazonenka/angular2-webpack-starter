@@ -28,7 +28,7 @@ const HMR = helpers.hasProcessFlag('hot');
 const AOT = helpers.hasNpmFlag('aot');
 const METADATA = {
   title: 'Angular2 Webpack Starter by @gdi2290 from @AngularClass',
-  baseUrl: '/angular2-webpack-starter',
+  baseUrl: 'https://sazonenka.github.io/angular2-webpack-starter/',
   isDevServer: helpers.isWebpackDevServer()
 };
 
