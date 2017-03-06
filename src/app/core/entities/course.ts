@@ -1,8 +1,7 @@
-export class Course {
-    constructor(
-        public id: string,
-        public name: string,
-        public description: string,
-        public startDate: Date,
-        public durationMin: number) {}
+export interface ICourse {
+  id: string;
+  title: string;
+  description: string;
+  createDate: Date;
+  durationMin: number;
 }
