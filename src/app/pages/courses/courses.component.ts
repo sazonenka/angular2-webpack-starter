@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 
 @Component({
-  template: './courses.component.html',
-  styles: ['./courses.component.scss']
+  selector: 'courses',
+  templateUrl: './courses.component.html',
+  styles: ['./courses.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  providers: []
 })
 export class CoursesComponent implements OnInit {
   constructor() {

@@ -1,9 +1,9 @@
-@import "../../../styles/variables/colors.scss";
+@import "../../../../styles/_variables.scss";
 
 .main-navbar {
   height: 60px;
   background-color: $c-primary;
-  color: $white;
+  color: white;
 }
 
 .logo {
@@ -27,8 +27,8 @@
 
   .menu-item {
     text-transform: uppercase;
-    border-left: solid 1px $white;
-    border-right: solid 1px $white;
+    border-left: solid 1px white;
+    border-right: solid 1px white;
     padding: 0 15px;
     display: inline-block;
     position: relative;

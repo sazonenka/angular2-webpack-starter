@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 
 @Component({
-  template: './login.component.html',
-  styles: ['./login.component.scss']
+  selector: 'login',
+  templateUrl: './login.component.html',
+  styles: ['./login.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  providers: []
 })
 export class LoginComponent implements OnInit {
   constructor() {

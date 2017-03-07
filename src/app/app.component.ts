@@ -15,7 +15,7 @@ import {
   selector: 'app',
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['./app.component.css'],
-  template: './app.template.html'
+  templateUrl: './app.template.html'
 })
 export class AppComponent implements OnInit {
   constructor() {
