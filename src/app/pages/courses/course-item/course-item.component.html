@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="details">
+    <div class="details-header">
+      <span class="title">{{item.title}}</span>
+      <span class="duration">{{item.durationMin}} min</span>
+      <span class="create-date">{{item.createDate}}</span>
+    </div>
+    <div class="description">
+      {{item.description}}
+    </div>
+  </div>
+  <div class="actions">
+    <button>Edit Course</button>
+    <button (click)="deleteCourse(item.id)">Delete</button>
+  </div>
+</div>

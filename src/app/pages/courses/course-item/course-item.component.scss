@@ -1,0 +1,38 @@
+.container {
+  border: 1px solid black;
+  display: flex;
+  margin-top: 10px;
+  padding: 10px;
+}
+
+.details {
+  flex: 1;
+  padding: 10px;
+}
+
+.details-header {
+  display: flex;
+}
+
+.title {
+  font-weight: bold;
+  flex: 1;
+  max-width: 25%;
+}
+
+.duration {
+  flex: 1;
+}
+
+.create-date {
+  font-style: italic;
+}
+
+.description {
+  font-size: 12px;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+}

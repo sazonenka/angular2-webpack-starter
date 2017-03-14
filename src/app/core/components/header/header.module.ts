@@ -1,10 +1,16 @@
 import { NgModule } from '@angular/core';
+import { BreadcrumbsModule } from './breadcrumbs';
+import { LogoModule } from './logo';
+import { LogoffModule } from './logoff';
 import { HeaderComponent } from './header.component';
-import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [HeaderComponent],
-  imports: [RouterModule],
+  imports: [
+    BreadcrumbsModule,
+    LogoModule,
+    LogoffModule,
+  ],
   exports: [HeaderComponent]
 })
 export class HeaderModule {

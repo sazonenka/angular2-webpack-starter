@@ -1,3 +1,5 @@
 <div>
-  COURSES PAGES
+  <toolbox></toolbox>
+  <course-item *ngFor="let courseItem of courseItems"
+      [item]="courseItem" (courseDeleted)="deleteCourse($event)"></course-item>
 </div>

@@ -1,0 +1,12 @@
+<div class="container">
+  <input [(ngModel)]="searchTerm"
+         class="search-box"
+         placeholder="name fragment or date">
+  <button (click)="findCourses()"
+          class="search-button">Find</button>
+
+  <span style="flex: 1;"></span>
+
+  <button (click)="addCourse()"
+          class="add-course-button">Add Course</button>
+</div>
