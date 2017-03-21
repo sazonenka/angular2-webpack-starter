@@ -1,17 +1,21 @@
-import { Component, ViewEncapsulation, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+
+import { AuthService } from '../../core/services';
 
 @Component({
   selector: 'login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  encapsulation: ViewEncapsulation.None,
-  providers: []
 })
-export class LoginComponent implements OnInit {
-  constructor() {
+export class LoginComponent {
+  private login: string;
+  private password: string;
+
+  constructor(private authService: AuthService) {
   }
 
-  public ngOnInit() {
-    console.log('Login init');
+  tryLogin() {
+    this.authService.login(this.login, this.password);
+    console.log(this.login, "was logged in.");
   }
 }

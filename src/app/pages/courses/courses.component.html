@@ -1,5 +1,8 @@
 <div>
   <toolbox></toolbox>
-  <course-item *ngFor="let courseItem of courseItems"
-      [item]="courseItem" (courseDeleted)="deleteCourse($event)"></course-item>
+  <course-item
+      *ngFor="let courseItem of courseItems; let idx = index"
+      [item]="courseItem"
+      [index]="idx"
+      (courseDeleted)="deleteCourse($event)"></course-item>
 </div>
