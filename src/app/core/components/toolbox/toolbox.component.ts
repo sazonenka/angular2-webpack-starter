@@ -6,13 +6,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./toolbox.component.scss'],
 })
 export class ToolboxComponent {
-  searchTerm = '';
+  public searchTerm = '';
 
-  findCourses() {
+  public findCourses() {
     console.log(this.searchTerm);
   }
 
-  addCourse() {
+  public addCourse() {
     console.log('Add Course button clicked!');
   }
 }

@@ -7,9 +7,7 @@ import { ToolboxComponent } from './toolbox.component';
   imports: [
     FormsModule,
   ],
-  exports: [ToolboxComponent]
+  exports: [ToolboxComponent],
 })
 export class ToolboxModule {
-  constructor() {
-  }
 }

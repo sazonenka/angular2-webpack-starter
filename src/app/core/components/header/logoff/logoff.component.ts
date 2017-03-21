@@ -6,6 +6,4 @@ import { Component } from '@angular/core';
   styleUrls: ['./logoff.component.scss'],
 })
 export class LogoffComponent {
-  constructor() {
-  }
 }

@@ -22,6 +22,4 @@ import { AuthService } from '../../services';
   ],
 })
 export class HeaderModule {
-  constructor() {
-  }
 }

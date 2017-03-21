@@ -5,21 +5,21 @@ const PASSWORD_KEY = 'COURSES_PASSWORD';
 
 @Injectable()
 export class AuthService {
-  login(login: string, password: string): void {
+  public login(login: string, password: string): void {
     localStorage.setItem(LOGIN_KEY, login);
     localStorage.setItem(PASSWORD_KEY, password);
   }
 
-  logout(): void {
+  public logout(): void {
     localStorage.removeItem(LOGIN_KEY);
     localStorage.removeItem(PASSWORD_KEY);
   }
 
-  isAuthenticated(): boolean {
+  public isAuthenticated(): boolean {
     return !!localStorage.getItem[LOGIN_KEY] && !!localStorage.getItem[PASSWORD_KEY];
   }
 
-  getUserInfo(): string {
+  public getUserInfo(): string {
     return localStorage.getItem[LOGIN_KEY];
   }
 }

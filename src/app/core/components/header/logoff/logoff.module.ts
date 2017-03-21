@@ -3,9 +3,7 @@ import { LogoffComponent } from './logoff.component';
 
 @NgModule({
   declarations: [LogoffComponent],
-  exports: [LogoffComponent]
+  exports: [LogoffComponent],
 })
 export class LogoffModule {
-  constructor() {
-  }
 }

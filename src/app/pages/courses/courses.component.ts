@@ -9,16 +9,16 @@ import { ICourse } from '../../core/entities';
   styleUrls: ['./courses.component.scss'],
 })
 export class CoursesComponent implements OnInit {
-  courseItems: ICourse[] = [];
+  public courseItems: ICourse[] = [];
 
   constructor(private coursesService: CoursesService) {
   }
 
-  ngOnInit() {
+  public ngOnInit() {
     this.courseItems = this.coursesService.listCourses();
   }
 
-  deleteCourse($event) {
+  public deleteCourse($event) {
     console.log($event);
     if (window.confirm('Do you really want to delete the course?')) {
       this.courseItems.splice($event.index, 1);

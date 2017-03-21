@@ -3,9 +3,7 @@ import { LogoComponent } from './logo.component';
 
 @NgModule({
   declarations: [LogoComponent],
-  exports: [LogoComponent]
+  exports: [LogoComponent],
 })
 export class LogoModule {
-  constructor() {
-  }
 }

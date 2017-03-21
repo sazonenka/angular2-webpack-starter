@@ -31,23 +31,25 @@ export class CoursesService {
     );
   }
 
-  listCourses(): ICourse[] {
+  public listCourses(): ICourse[] {
     let courses: ICourse[] = [];
     for (let courseId in this.courseItems) {
-      courses.push(this.courseItems[courseId]);
+      if (this.courseItems.hasOwnProperty(courseId)) {
+        courses.push(this.courseItems[courseId]);
+      }
     }
     return courses;
   }
 
-  getCourse(courseId: string): ICourse {
+  public getCourse(courseId: string): ICourse {
     return this.courseItems[courseId];
   }
 
-  upsertCourse(course: ICourse): void {
+  public upsertCourse(course: ICourse): void {
     this.courseItems[course.id] = course;
   }
 
-  deleteCourse(courseId: string): void {
+  public deleteCourse(courseId: string): void {
     delete this.courseItems[courseId];
   }
 }

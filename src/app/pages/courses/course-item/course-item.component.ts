@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
-import { ICourse } from '../../../core/entities'
+import { ICourse } from '../../../core/entities';
 
 @Component({
   selector: 'course-item',
@@ -8,19 +8,16 @@ import { ICourse } from '../../../core/entities'
   styleUrls: ['./course-item.component.scss'],
 })
 export class CourseItemComponent {
-  @Input() item: ICourse;
-  @Input() index: number;
-  @Output() courseDeleted = new EventEmitter();
+  @Input()
+  public item: ICourse;
 
-  constructor() {
-    console.log('Course Item constructor');
-  }
+  @Input()
+  public index: number;
 
-  ngOnInit() {
-    console.log('Course Item ngOnInit');
-  }
+  @Output()
+  public courseDeleted = new EventEmitter();
 
-  deleteCourse() {
+  public deleteCourse() {
     this.courseDeleted.emit({
       id: this.item.id,
       index: this.index,

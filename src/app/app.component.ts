@@ -3,7 +3,6 @@
  */
 import {
   Component,
-  OnInit,
   ViewEncapsulation
 } from '@angular/core';
 
@@ -17,10 +16,5 @@ import {
   styleUrls: ['./app.component.css'],
   templateUrl: './app.template.html'
 })
-export class AppComponent implements OnInit {
-  constructor() {
-  }
-
-  public ngOnInit() {
-  }
+export class AppComponent {
 }

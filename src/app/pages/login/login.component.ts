@@ -8,14 +8,14 @@ import { AuthService } from '../../core/services';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-  private login: string;
-  private password: string;
+  public login: string;
+  public password: string;
 
   constructor(private authService: AuthService) {
   }
 
-  tryLogin() {
+  public tryLogin() {
     this.authService.login(this.login, this.password);
-    console.log(this.login, "was logged in.");
+    console.log(this.login, 'was logged in.');
   }
 }
