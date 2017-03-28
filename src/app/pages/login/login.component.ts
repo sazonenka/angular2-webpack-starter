@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ChangeDetectionStrategy } from '@angular/core';
 
-import { AuthService } from '../../core/services';
+import { AuthService, LoaderBlockService } from '../../core/services';
 
 @Component({
   selector: 'login',
@@ -13,11 +13,16 @@ export class LoginComponent {
   public login: string;
   public password: string;
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private loaderService: LoaderBlockService) {
   }
 
   public tryLogin() {
-    this.authService.login(this.login, this.password);
-    console.log(this.login, 'was logged in.');
+    this.loaderService.show();
+    setTimeout(() => {
+      this.authService.login(this.login, this.password);
+      console.log(this.login, 'was logged in.');
+
+      this.loaderService.hide();
+    }, 3000);
   }
 }

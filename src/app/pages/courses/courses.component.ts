@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChangeDetectionStrategy } from '@angular/core';
 
-import { CoursesService } from '../../core/services';
+import { CoursesService, LoaderBlockService } from '../../core/services';
 import { ICourse } from '../../core/entities';
 
 @Component({
@@ -13,7 +13,7 @@ import { ICourse } from '../../core/entities';
 export class CoursesComponent implements OnInit {
   public courseItems: ICourse[] = [];
 
-  constructor(private coursesService: CoursesService) {
+  constructor(private coursesService: CoursesService, private loaderService: LoaderBlockService) {
   }
 
   public ngOnInit() {
@@ -21,10 +21,14 @@ export class CoursesComponent implements OnInit {
   }
 
   public deleteCourse($event) {
-    console.log($event);
     if (window.confirm('Do you really want to delete the course?')) {
-      this.courseItems.splice($event.index, 1);
-      this.coursesService.deleteCourse($event.id);
+      this.loaderService.show();
+      setTimeout(() => {
+        this.courseItems.splice($event.index, 1);
+        this.coursesService.deleteCourse($event.id);
+
+        this.loaderService.hide();
+      }, 3000);
     }
   }
 }
