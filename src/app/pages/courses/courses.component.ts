@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 
 import { CoursesService, LoaderBlockService } from '../../core/services';
 import { ICourse } from '../../core/entities';
@@ -13,7 +12,10 @@ import { ICourse } from '../../core/entities';
 export class CoursesComponent implements OnInit {
   public courseItems: ICourse[] = [];
 
-  constructor(private coursesService: CoursesService, private loaderService: LoaderBlockService) {
+  constructor(
+    private cd: ChangeDetectorRef,
+    private coursesService: CoursesService, 
+    private loaderService: LoaderBlockService) {
   }
 
   public ngOnInit() {
@@ -24,9 +26,9 @@ export class CoursesComponent implements OnInit {
     if (window.confirm('Do you really want to delete the course?')) {
       this.loaderService.show();
       setTimeout(() => {
-        this.courseItems.splice($event.index, 1);
         this.coursesService.deleteCourse($event.id);
-
+        this.courseItems = this.coursesService.listCourses();
+        this.cd.markForCheck();
         this.loaderService.hide();
       }, 3000);
     }
