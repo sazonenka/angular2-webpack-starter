@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ChangeDetectionStrategy } from '@angular/core';
 
 import { AuthService } from '../../core/services';
 
@@ -6,6 +7,7 @@ import { AuthService } from '../../core/services';
   selector: 'login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent {
   public login: string;

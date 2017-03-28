@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy } from '@angular/core';
 
 import { CoursesService } from '../../core/services';
 import { ICourse } from '../../core/entities';
@@ -7,6 +8,7 @@ import { ICourse } from '../../core/entities';
   selector: 'courses',
   templateUrl: './courses.component.html',
   styleUrls: ['./courses.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CoursesComponent implements OnInit {
   public courseItems: ICourse[] = [];
