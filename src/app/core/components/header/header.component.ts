@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ChangeDetectionStrategy } from '@angular/core';
+
+import { Observable } from 'rxjs';
 
 import { AuthService } from '../../services';
 
@@ -9,13 +11,10 @@ import { AuthService } from '../../services';
   styleUrls: ['./header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeaderComponent implements OnInit {
-  public authenticated = false;
+export class HeaderComponent {
+  public login: Observable<string>;
 
   constructor(private authService: AuthService) {
-  }
-
-  public ngOnInit() {
-    this.authenticated = this.authService.isAuthenticated();
+    this.login = this.authService.getUserInfo();
   }
 }

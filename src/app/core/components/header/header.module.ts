@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { BreadcrumbsModule } from './breadcrumbs';
 import { LogoModule } from './logo';
 import { LogoffModule } from './logoff';
+
 import { HeaderComponent } from './header.component';
 
 import { AuthService } from '../../services';

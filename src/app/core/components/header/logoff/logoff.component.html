@@ -1,6 +1,4 @@
 <div class="logoff">
-  <div>user login</div>
-  <div>
-    <a href="#" class="logoff-link">logoff</a>
-  </div>
+  <div *ngIf="login | async">{{login | async}}</div>
+  <div (click)="logoff();" class="logoff-link">logoff</div>
 </div>

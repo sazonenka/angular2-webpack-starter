@@ -1,7 +1,7 @@
 <div class="main-navbar">
   <div class="container">
     <main-logo></main-logo>
-    <breadcrumbs *ngIf="authenticated"></breadcrumbs>
-    <logoff *ngIf="authenticated"></logoff>
+    <breadcrumbs *ngIf="login | async"></breadcrumbs>
+    <logoff *ngIf="login | async"></logoff>
   </div>
 </div>
