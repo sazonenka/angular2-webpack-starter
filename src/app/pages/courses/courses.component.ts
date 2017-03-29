@@ -28,17 +28,17 @@ export class CoursesComponent implements OnInit, OnDestroy {
 
   constructor(
       private cd: ChangeDetectorRef,
-      private coursesService: CoursesService, 
+      private coursesService: CoursesService,
       private loaderService: LoaderBlockService,
-      private ngZone: NgZone) {
+      private ngZone: NgZone) {}
+
+  public ngOnInit() {
+    this.courseItems = this.coursesService.listCourses();
+
     this.onUnstableSubscription =
         this.ngZone.onUnstable.subscribe(this.onZoneUnstable.bind(this));
     this.onStableSubscription =
         this.ngZone.onStable.subscribe(this.onZoneStable.bind(this));
-  }
-
-  public ngOnInit() {
-    this.courseItems = this.coursesService.listCourses();
   }
 
   public deleteCourse($event) {
@@ -58,8 +58,9 @@ export class CoursesComponent implements OnInit, OnDestroy {
   }
 
   private onZoneStable(): void {
+    let endTime = new Date();
     if (this.startTime) {
-      console.log(`Process time (ms): ${ new Date().getMilliseconds() - this.startTime.getMilliseconds() }`);
+      console.log(`Process time (ms): ${ endTime.getMilliseconds() - this.startTime.getMilliseconds() }`);
     }
   }
 

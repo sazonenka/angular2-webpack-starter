@@ -13,7 +13,9 @@ export class LoginComponent {
   public login: string;
   public password: string;
 
-  constructor(private authService: AuthService, private loaderService: LoaderBlockService) {
+  constructor(
+      private authService: AuthService,
+      private loaderService: LoaderBlockService) {
   }
 
   public tryLogin() {

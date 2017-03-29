@@ -6,11 +6,11 @@ import { BehaviorSubject } from 'rxjs';
 export class LoaderBlockService {
   public showSubject = new BehaviorSubject<boolean>(false);
 
-  show() {
+  public show() {
     this.showSubject.next(true);
   }
 
-  hide() {
+  public hide() {
     this.showSubject.next(false);
   }
 }
