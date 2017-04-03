@@ -1,7 +1,7 @@
 <div>
   <toolbox></toolbox>
   <course-item
-      *ngFor="let courseItem of courseItems; let idx = index"
+      *ngFor="let courseItem of courseItems | orderCoursesBy:'createDate'; let idx = index"
       [item]="courseItem"
       [index]="idx"
       (courseDeleted)="deleteCourse($event)"></course-item>
