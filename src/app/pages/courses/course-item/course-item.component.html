@@ -3,7 +3,7 @@
     [borderColoredBy]="item.createDate">
   <div class="details">
     <div class="details-header">
-      <span class="title">{{item.title}}</span>
+      <span class="title">{{item.title | uppercase}}</span>
       <span class="duration">{{item.durationMin}} min</span>
       <span *ngIf="item.topRated" class="top-rated">&#9734;</span>
       <span class="spacer"></span>
