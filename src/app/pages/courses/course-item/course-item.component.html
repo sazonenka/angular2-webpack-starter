@@ -7,7 +7,7 @@
       <span class="duration">{{item.durationMin}} min</span>
       <span *ngIf="item.topRated" class="top-rated">&#9734;</span>
       <span class="spacer"></span>
-      <span class="create-date">{{item.createDate}}</span>
+      <span class="create-date">{{item.createDate | date}}</span>
     </div>
     <div class="description">
       {{item.description}}
