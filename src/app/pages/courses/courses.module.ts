@@ -6,6 +6,7 @@ import { ToolboxModule } from '../../core/components/toolbox';
 import { CoursesComponent } from './courses.component';
 import { CourseItemComponent } from './course-item/course-item.component';
 import { BorderColoredByDirective } from '../../core/directives';
+import { DurationPipe } from '../../core/pipes';
 
 import { CoursesService } from '../../core/services';
 
@@ -14,6 +15,7 @@ import { CoursesService } from '../../core/services';
     CoursesComponent,
     CourseItemComponent,
     BorderColoredByDirective,
+    DurationPipe,
   ],
   imports: [
     CommonModule,

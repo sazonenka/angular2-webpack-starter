@@ -4,7 +4,7 @@
   <div class="details">
     <div class="details-header">
       <span class="title">{{item.title | uppercase}}</span>
-      <span class="duration">{{item.durationMin}} min</span>
+      <span class="duration">{{item.durationMin | duration}}</span>
       <span *ngIf="item.topRated" class="top-rated">&#9734;</span>
       <span class="spacer"></span>
       <span class="create-date">{{item.createDate | date}}</span>
