@@ -6,6 +6,10 @@
   padding: 10px;
 }
 
+.container.starred {
+  background-color: #fad6a5;
+}
+
 .details {
   flex: 1;
   padding: 10px;
@@ -13,15 +17,22 @@
 
 .details-header {
   display: flex;
+  max-width: 100%;
 }
 
 .title {
   font-weight: bold;
-  flex: 1;
-  max-width: 25%;
 }
 
 .duration {
+  margin-left: 10px;
+}
+
+.top-rated {
+  margin-left: 10px;
+}
+
+.spacer {
   flex: 1;
 }
 

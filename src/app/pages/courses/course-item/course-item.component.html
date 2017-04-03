@@ -1,8 +1,12 @@
-<div class="container" [borderColoredBy]="item.createDate">
+<div class="container"
+    [ngClass]="{'starred': item.topRated}"
+    [borderColoredBy]="item.createDate">
   <div class="details">
     <div class="details-header">
       <span class="title">{{item.title}}</span>
       <span class="duration">{{item.durationMin}} min</span>
+      <span *ngIf="item.topRated" class="top-rated">&#9734;</span>
+      <span class="spacer"></span>
       <span class="create-date">{{item.createDate}}</span>
     </div>
     <div class="description">
