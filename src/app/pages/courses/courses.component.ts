@@ -20,9 +20,9 @@ import { ICourse } from '../../core/entities';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CoursesComponent implements OnInit, OnDestroy {
-  private titleFragment: string;
-
   public courseItems: ICourse[] = [];
+
+  private titleFragment: string;
 
   private startTime: Date;
 
@@ -46,18 +46,13 @@ export class CoursesComponent implements OnInit, OnDestroy {
         this.ngZone.onStable.subscribe(this.onZoneStable.bind(this));
   }
 
-  private loadCourseItems(): void {
-    this.courseItems = this.filterPipe.transform(
-      this.coursesService.listCourses(), this.titleFragment);
-  }
-
   public filterCourses(searchTerm: string) {
     this.titleFragment = searchTerm;
     this.loadCourseItems();
   }
 
   public courseItemsEmpty(): boolean {
-    return !this.courseItems || this.courseItems.length == 0;
+    return !this.courseItems || this.courseItems.length === 0;
   }
 
   public deleteCourse($event) {
@@ -73,6 +68,16 @@ export class CoursesComponent implements OnInit, OnDestroy {
     }
   }
 
+  public ngOnDestroy() {
+    this.onUnstableSubscription.unsubscribe();
+    this.onStableSubscription.unsubscribe();
+  }
+
+  private loadCourseItems(): void {
+    this.courseItems = this.filterPipe.transform(
+      this.coursesService.listCourses(), this.titleFragment);
+  }
+
   private onZoneUnstable(): void {
     this.startTime = new Date();
   }
@@ -82,10 +87,5 @@ export class CoursesComponent implements OnInit, OnDestroy {
     if (this.startTime) {
       console.log(`Process time (ms): ${ endTime.getMilliseconds() - this.startTime.getMilliseconds() }`);
     }
-  }
-
-  public ngOnDestroy() {
-    this.onUnstableSubscription.unsubscribe();
-    this.onStableSubscription.unsubscribe();
   }
 }

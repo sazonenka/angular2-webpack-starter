@@ -6,9 +6,9 @@ import { ICourse } from '../entities';
   name: 'filter'
 })
 export class FilterPipe implements PipeTransform {
-  public transform(array: Array<ICourse>, value: string): Array<ICourse> {
+  public transform(array: ICourse[], value: string): ICourse[] {
     if (value) {
-      return [...array].filter(course => course.title.includes(value));
+      return [...array].filter((course) => course.title.includes(value));
     }
     return array;
   }
