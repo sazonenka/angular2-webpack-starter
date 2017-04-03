@@ -1,2 +1,2 @@
 export * from './duration';
-export * from './ordercoursesby';
+export * from './orderby';
