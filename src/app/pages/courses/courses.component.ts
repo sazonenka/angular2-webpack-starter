@@ -10,6 +10,7 @@ import {
 import { Subscription } from 'rxjs';
 
 import { CoursesService, LoaderBlockService } from '../../core/services';
+import { FilterPipe } from '../../core/pipes';
 import { ICourse } from '../../core/entities';
 
 @Component({
@@ -19,6 +20,8 @@ import { ICourse } from '../../core/entities';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CoursesComponent implements OnInit, OnDestroy {
+  private titleFragment: string;
+
   public courseItems: ICourse[] = [];
 
   private startTime: Date;
@@ -30,15 +33,27 @@ export class CoursesComponent implements OnInit, OnDestroy {
       private cd: ChangeDetectorRef,
       private coursesService: CoursesService,
       private loaderService: LoaderBlockService,
+      private filterPipe: FilterPipe,
       private ngZone: NgZone) {}
 
   public ngOnInit() {
-    this.courseItems = this.coursesService.listCourses();
+    this.titleFragment = '';
+    this.loadCourseItems();
 
     this.onUnstableSubscription =
         this.ngZone.onUnstable.subscribe(this.onZoneUnstable.bind(this));
     this.onStableSubscription =
         this.ngZone.onStable.subscribe(this.onZoneStable.bind(this));
+  }
+
+  private loadCourseItems(): void {
+    this.courseItems = this.filterPipe.transform(
+      this.coursesService.listCourses(), this.titleFragment);
+  }
+
+  public filterCourses(searchTerm: string) {
+    this.titleFragment = searchTerm;
+    this.loadCourseItems();
   }
 
   public courseItemsEmpty(): boolean {
@@ -50,7 +65,8 @@ export class CoursesComponent implements OnInit, OnDestroy {
       this.loaderService.show();
       setTimeout(() => {
         this.coursesService.deleteCourse($event.id);
-        this.courseItems = this.coursesService.listCourses();
+        this.loadCourseItems();
+
         this.cd.markForCheck();
         this.loaderService.hide();
       }, 3000);

@@ -1,5 +1,9 @@
-import { Component } from '@angular/core';
-import { ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  EventEmitter,
+  Output,
+} from '@angular/core';
 
 @Component({
   selector: 'toolbox',
@@ -8,10 +12,13 @@ import { ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToolboxComponent {
+  @Output()
+  public coursesFiltered = new EventEmitter();
+
   public searchTerm = '';
 
   public findCourses() {
-    console.log(this.searchTerm);
+    this.coursesFiltered.emit(this.searchTerm);
   }
 
   public addCourse() {

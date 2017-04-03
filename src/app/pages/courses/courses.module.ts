@@ -7,6 +7,7 @@ import { CoursesComponent } from './courses.component';
 import { CourseItemComponent } from './course-item/course-item.component';
 import { BorderColoredByDirective } from '../../core/directives';
 import { DurationPipe } from '../../core/pipes';
+import { FilterPipe } from '../../core/pipes';
 import { OrderByPipe } from '../../core/pipes';
 
 import { CoursesService } from '../../core/services';
@@ -25,6 +26,7 @@ import { CoursesService } from '../../core/services';
   ],
   providers: [
     CoursesService,
+    FilterPipe,
   ],
 })
 export class CoursesModule {

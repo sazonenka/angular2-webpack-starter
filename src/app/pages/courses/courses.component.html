@@ -1,5 +1,5 @@
 <div>
-  <toolbox></toolbox>
+  <toolbox (coursesFiltered)="filterCourses($event)"></toolbox>
   <course-item
       *ngFor="let courseItem of courseItems | orderBy:'createDate'; let idx = index"
       [item]="courseItem"
