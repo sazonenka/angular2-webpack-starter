@@ -12,21 +12,21 @@ export class CoursesService {
       '1',
       'Video Course 1',
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-      new Date(),
+      this.addDays(new Date(), 3),
       88,
     );
     this.courseItems['2'] = new Course(
       '2',
       'Video Course 2',
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-      new Date(),
+      this.addDays(new Date(), -20),
       15,
     );
     this.courseItems['3'] = new Course(
       '3',
       'Video Course 3',
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-      new Date(),
+      this.addDays(new Date(), -3),
       135,
     );
   }
@@ -51,5 +51,11 @@ export class CoursesService {
 
   public deleteCourse(courseId: string): void {
     delete this.courseItems[courseId];
+  }
+
+  private addDays(date: Date, days: number): Date {
+    let result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return result;
   }
 }
