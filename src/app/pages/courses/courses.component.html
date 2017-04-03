@@ -5,4 +5,8 @@
       [item]="courseItem"
       [index]="idx"
       (courseDeleted)="deleteCourse($event)"></course-item>
+
+  <div *ngIf="courseItemsEmpty()" class="no-courses-panel">
+    No data. Feel free to add a new course.
+  </div>
 </div>

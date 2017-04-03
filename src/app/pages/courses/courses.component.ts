@@ -41,6 +41,10 @@ export class CoursesComponent implements OnInit, OnDestroy {
         this.ngZone.onStable.subscribe(this.onZoneStable.bind(this));
   }
 
+  public courseItemsEmpty(): boolean {
+    return !this.courseItems || this.courseItems.length == 0;
+  }
+
   public deleteCourse($event) {
     if (window.confirm('Do you really want to delete the course?')) {
       this.loaderService.show();
