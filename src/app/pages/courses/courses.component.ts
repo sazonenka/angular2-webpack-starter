@@ -40,6 +40,11 @@ export class CoursesComponent implements OnInit, OnDestroy {
     this.titleFragment = '';
     this.listCoursesSubscription =
       this.coursesService.listCourses()
+          .map(items => items.filter(item => {
+            let now = new Date();
+            let diffDays = (now.getTime() - item.createDate.getTime()) / (1000 * 60 * 60 * 24);
+            return diffDays < 14;
+          }))
           .subscribe(items => this.courseItems = items);
 
     this.onUnstableSubscription =
