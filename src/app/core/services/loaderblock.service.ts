@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 
-import { BehaviorSubject } from 'rxjs';
+import { ReplaySubject } from 'rxjs';
 
 @Injectable()
 export class LoaderBlockService {
-  public showSubject = new BehaviorSubject<boolean>(false);
+  public showSubject = new ReplaySubject<boolean>(1);
 
   public show() {
     this.showSubject.next(true);

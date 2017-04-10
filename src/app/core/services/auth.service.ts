@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 
-import { BehaviorSubject, Observable } from 'rxjs';
+import { ReplaySubject, Observable } from 'rxjs';
 
 const LOGIN_KEY = 'COURSES_LOGIN';
 const PASSWORD_KEY = 'COURSES_PASSWORD';
 
 @Injectable()
 export class AuthService {
-  private loginSubject = new BehaviorSubject<string>(undefined);
+  private loginSubject = new ReplaySubject<string>(1);
 
   public getUserInfo(): Observable<string> {
     return this.loginSubject.asObservable();
