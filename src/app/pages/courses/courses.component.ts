@@ -20,12 +20,12 @@ import { ICourse } from '../../core/entities';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CoursesComponent implements OnInit, OnDestroy {
+  public titleFragment: string;
   public courseItems: ICourse[] = [];
-
-  private titleFragment: string;
 
   private startTime: Date;
 
+  private listCoursesSubscription: Subscription;
   private onUnstableSubscription: Subscription;
   private onStableSubscription: Subscription;
 
@@ -38,7 +38,9 @@ export class CoursesComponent implements OnInit, OnDestroy {
 
   public ngOnInit() {
     this.titleFragment = '';
-    this.loadCourseItems();
+    this.listCoursesSubscription =
+      this.coursesService.listCourses()
+          .subscribe(items => this.courseItems = items);
 
     this.onUnstableSubscription =
         this.ngZone.onUnstable.subscribe(this.onZoneUnstable.bind(this));
@@ -46,21 +48,19 @@ export class CoursesComponent implements OnInit, OnDestroy {
         this.ngZone.onStable.subscribe(this.onZoneStable.bind(this));
   }
 
-  public filterCourses(searchTerm: string) {
+  public filterCourses(searchTerm: string): void {
     this.titleFragment = searchTerm;
-    this.loadCourseItems();
   }
 
   public courseItemsEmpty(): boolean {
     return !this.courseItems || this.courseItems.length === 0;
   }
 
-  public deleteCourse($event) {
+  public deleteCourse($event): void {
     if (window.confirm('Do you really want to delete the course?')) {
       this.loaderService.show();
       setTimeout(() => {
         this.coursesService.deleteCourse($event.id);
-        this.loadCourseItems();
 
         this.cd.markForCheck();
         this.loaderService.hide();
@@ -69,13 +69,9 @@ export class CoursesComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy() {
+    this.listCoursesSubscription.unsubscribe();
     this.onUnstableSubscription.unsubscribe();
     this.onStableSubscription.unsubscribe();
-  }
-
-  private loadCourseItems(): void {
-    this.courseItems = this.filterPipe.transform(
-      this.coursesService.listCourses(), this.titleFragment);
   }
 
   private onZoneUnstable(): void {
