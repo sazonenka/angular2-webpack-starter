@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
 
 import { CoursesService, LoaderBlockService } from '../../core/services';
 import { FilterPipe } from '../../core/pipes';
-import { ICourse } from '../../core/entities';
+import { ICourse, Course, BackendCourse } from '../../core/entities';
 
 @Component({
   selector: 'courses',
@@ -20,8 +20,8 @@ import { ICourse } from '../../core/entities';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CoursesComponent implements OnInit, OnDestroy {
-  public titleFragment: string;
-  public courseItems: ICourse[] = [];
+  private courseItems: ICourse[];
+  private titleFragment: string;
 
   private startTime: Date;
 
@@ -37,15 +37,12 @@ export class CoursesComponent implements OnInit, OnDestroy {
       private ngZone: NgZone) {}
 
   public ngOnInit() {
-    this.titleFragment = '';
     this.listCoursesSubscription =
-      this.coursesService.listCourses()
-          .map(items => items.filter(item => {
-            let now = new Date();
-            let diffDays = (now.getTime() - item.createDate.getTime()) / (1000 * 60 * 60 * 24);
-            return diffDays < 14;
-          }))
-          .subscribe(items => this.courseItems = items);
+        this.coursesService.listCourses()
+            .map(this.convertFromBackendCourses, this)
+            .map(this.filterOutdatedCourses, this)
+            .subscribe((items) => this.courseItems = items);
+    this.titleFragment = '';
 
     this.onUnstableSubscription =
         this.ngZone.onUnstable.subscribe(this.onZoneUnstable.bind(this));
@@ -53,12 +50,16 @@ export class CoursesComponent implements OnInit, OnDestroy {
         this.ngZone.onStable.subscribe(this.onZoneStable.bind(this));
   }
 
-  public filterCourses(searchTerm: string): void {
+  public getCourseItems(): ICourse[] {
+    return this.filterPipe.transform(this.courseItems, this.titleFragment);
+  }
+
+  public setSearchTerm(searchTerm: string): void {
     this.titleFragment = searchTerm;
   }
 
   public courseItemsEmpty(): boolean {
-    return !this.courseItems || this.courseItems.length === 0;
+    return this.getCourseItems().length === 0;
   }
 
   public deleteCourse($event): void {
@@ -77,6 +78,25 @@ export class CoursesComponent implements OnInit, OnDestroy {
     this.listCoursesSubscription.unsubscribe();
     this.onUnstableSubscription.unsubscribe();
     this.onStableSubscription.unsubscribe();
+  }
+
+  private convertFromBackendCourses(items: BackendCourse[]): ICourse[] {
+    return items.map((item) => new Course(
+      item.id,
+      item.name,
+      item.content,
+      item.createDate,
+      item.duration,
+      item.featured
+    ));
+  }
+
+  private filterOutdatedCourses(items: ICourse[]): ICourse[] {
+    return items.filter((item) => {
+      let now = new Date();
+      let diffDays = (now.getTime() - item.date.getTime()) / (1000 * 60 * 60 * 24);
+      return diffDays < 14;
+    });
   }
 
   private onZoneUnstable(): void {
