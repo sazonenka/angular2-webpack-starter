@@ -1,6 +1,10 @@
-import { Component } from '@angular/core';
-import { Input, Output, EventEmitter } from '@angular/core';
-import { ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  Input,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 
 import { ICourse } from '../../../core/entities';
 
@@ -21,9 +25,6 @@ export class CourseItemComponent {
   public courseDeleted = new EventEmitter();
 
   public deleteCourse() {
-    this.courseDeleted.emit({
-      id: this.item.id,
-      index: this.index,
-    });
+    this.courseDeleted.emit(this.item.id);
   }
 }

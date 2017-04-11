@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 
-import { ReplaySubject, Observable } from 'rxjs';
+import {
+  Observable,
+  ReplaySubject,
+} from 'rxjs';
 
 const LOGIN_KEY = 'COURSES_LOGIN';
 const PASSWORD_KEY = 'COURSES_PASSWORD';

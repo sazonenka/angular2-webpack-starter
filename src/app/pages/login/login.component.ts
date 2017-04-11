@@ -1,7 +1,12 @@
-import { Component } from '@angular/core';
-import { ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 
-import { AuthService, LoaderBlockService } from '../../core/services';
+import {
+  AuthService,
+  LoaderBlockService,
+} from '../../core/services';
 
 @Component({
   selector: 'login',

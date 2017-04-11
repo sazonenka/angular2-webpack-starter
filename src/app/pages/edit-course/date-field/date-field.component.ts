@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
-import { ChangeDetectionStrategy } from '@angular/core';
-import { Input } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  Input,
+} from '@angular/core';
 
 import { ICourse } from '../../../core/entities';
 

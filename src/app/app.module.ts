@@ -25,7 +25,7 @@ import { AppComponent } from './app.component';
 
 // Pages
 import { CoursesComponent } from './pages/courses';
-import { EditCourseComponent } from './pages/editcourse';
+import { EditCourseComponent } from './pages/edit-course';
 import { LoginComponent } from './pages/login';
 import { NoContentComponent } from './pages/no-content';
 
@@ -33,15 +33,15 @@ import { NoContentComponent } from './pages/no-content';
 import { BreadcrumbsComponent } from './core/components/header';
 import { FooterComponent } from './core/components/footer';
 import { HeaderComponent } from './core/components/header';
-import { LoaderBlockComponent } from './core/components/loaderblock';
+import { LoaderBlockComponent } from './core/components/loader-block';
 import { LogoComponent } from './core/components/header';
 import { LogoffComponent } from './core/components/header';
 import { ToolboxComponent } from './core/components/toolbox';
 
 // Page Components
 import { CourseItemComponent } from './pages/courses';
-import { DateFieldComponent } from './pages/editcourse';
-import { DurationFieldComponent } from './pages/editcourse';
+import { DateFieldComponent } from './pages/edit-course';
+import { DurationFieldComponent } from './pages/edit-course';
 
 // Directives
 import { BorderColoredByDirective } from './core/directives';

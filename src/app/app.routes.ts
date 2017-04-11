@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { CoursesComponent } from './pages/courses';
-import { EditCourseComponent } from './pages/editcourse';
+import { EditCourseComponent } from './pages/edit-course';
 import { LoginComponent } from './pages/login';
 import { NoContentComponent } from './pages/no-content';
 

@@ -2,7 +2,7 @@ import {
   Directive,
   ElementRef,
   Input,
-  OnInit
+  OnInit,
 } from '@angular/core';
 
 @Directive({

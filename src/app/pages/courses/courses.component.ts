@@ -9,9 +9,16 @@ import {
 
 import { Subscription } from 'rxjs';
 
-import { CoursesService, LoaderBlockService } from '../../core/services';
+import {
+  ICourse,
+  Course,
+  BackendCourse,
+} from '../../core/entities';
 import { FilterPipe } from '../../core/pipes';
-import { ICourse, Course, BackendCourse } from '../../core/entities';
+import {
+  CoursesService,
+  LoaderBlockService,
+} from '../../core/services';
 
 @Component({
   selector: 'courses',
@@ -30,10 +37,10 @@ export class CoursesComponent implements OnInit, OnDestroy {
   private onStableSubscription: Subscription;
 
   constructor(
-      private cd: ChangeDetectorRef,
       private coursesService: CoursesService,
       private loaderService: LoaderBlockService,
       private filterPipe: FilterPipe,
+      private cd: ChangeDetectorRef,
       private ngZone: NgZone) {}
 
   public ngOnInit() {
@@ -62,11 +69,11 @@ export class CoursesComponent implements OnInit, OnDestroy {
     return this.getCourseItems().length === 0;
   }
 
-  public deleteCourse($event): void {
+  public deleteCourse(id: string): void {
     if (window.confirm('Do you really want to delete the course?')) {
       this.loaderService.show();
       setTimeout(() => {
-        this.coursesService.deleteCourse($event.id);
+        this.coursesService.deleteCourse(id);
 
         this.cd.markForCheck();
         this.loaderService.hide();

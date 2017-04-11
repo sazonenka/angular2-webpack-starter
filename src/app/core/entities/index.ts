@@ -1,2 +1,2 @@
-export * from './course';
 export * from './backend-course';
+export * from './course';
