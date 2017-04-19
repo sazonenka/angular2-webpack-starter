@@ -54,6 +54,7 @@ import { OrderByPipe } from './core/pipes';
 // Services
 import { AuthService } from './core/services';
 import { CoursesService } from './core/services';
+import { HttpService } from './core/services';
 import { LoaderBlockService } from './core/services';
 
 import '../styles/styles.scss';
@@ -106,6 +107,7 @@ const APP_PROVIDERS = [
     FilterPipe,
     AuthService,
     CoursesService,
+    HttpService,
     LoaderBlockService,
   ]
 })
