@@ -1,7 +1,7 @@
-<div>
+<div class="container">
   <toolbox (coursesFiltered)="setSearchTerm($event)"></toolbox>
   <course-item
-      *ngFor="let courseItem of getCourseItems() | orderBy:'date'; let idx = index"
+      *ngFor="let courseItem of courseItems | orderBy:'date'; let idx = index"
       [item]="courseItem"
       [index]="idx"
       (courseDeleted)="deleteCourse($event)"></course-item>

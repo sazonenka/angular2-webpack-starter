@@ -1,5 +1,5 @@
 export interface ICourse {
-  id: string;
+  id: number;
   title: string;
   description: string;
   date: Date;
@@ -9,11 +9,18 @@ export interface ICourse {
 
 export class Course implements ICourse {
   constructor(
-    public id: string,
+    public id: number,
     public title: string,
     public description: string,
     public date: Date,
     public durationMin: number,
     public topRated: boolean
+  ) { }
+}
+
+export class ListCoursesResponse {
+  constructor(
+    public courses: ICourse[],
+    public total: number
   ) { }
 }

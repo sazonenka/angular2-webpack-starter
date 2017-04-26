@@ -23,7 +23,7 @@ export class AuthService {
   }
 
   public login(login: string, password: string): void {
-    this.httpService.post(`${this.httpService.baseUrl}/auth/login`, {
+    this.httpService.post('/auth/login', {
       login: login,
       password: password,
     }).toPromise().then((resp: Response) => {

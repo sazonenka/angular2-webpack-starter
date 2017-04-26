@@ -22,13 +22,10 @@ export class HttpService extends Http {
     super(backend, options);
   }
 
-  public get baseUrl(): string {
-    return BASE_URL;
-  }
-
   public request(url: string | Request, options?: RequestOptionsArgs): Observable<Response> {
     let token = localStorage.getItem('token');
     if (typeof url === 'string') {
+      url = BASE_URL + url;
       if (!options) {
         options = {
           headers: new Headers(),
@@ -36,6 +33,7 @@ export class HttpService extends Http {
       }
       options.headers.set('Authorization', token);
     } else {
+      url.url = BASE_URL + url.url;
       url.headers.set('Authorization', token);
     }
     return super.request(url, options);
