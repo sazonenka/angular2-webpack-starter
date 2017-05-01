@@ -1,7 +1,5 @@
-import {
-  Component,
-  ChangeDetectionStrategy,
-} from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 import { ICourse } from '../../core/entities';
 
@@ -14,11 +12,11 @@ import { ICourse } from '../../core/entities';
 export class EditCourseComponent {
   public course: ICourse = <ICourse> {};
 
-  public onSubmit() {
-    console.log('EditCourseComponent.onSubmit()');
+  public submit(form: NgForm) {
+    console.log('EditCourseComponent.onSubmit()', form.value);
   }
 
-  public onCancel() {
-    console.log('EditCourseComponent.onCancel()');
+  public cancel(form: NgForm) {
+    form.reset();
   }
 }
