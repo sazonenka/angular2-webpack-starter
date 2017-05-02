@@ -1,7 +1,7 @@
 <input
     type="text"
     class="form-control"
-    (keyup)="onChange($event)"
-    (change)="onChange($event)"
+    [(ngModel)]="dateString"
+    (ngModelChange)="onChange($event)"
     (blur)="onBlur()"
     required>

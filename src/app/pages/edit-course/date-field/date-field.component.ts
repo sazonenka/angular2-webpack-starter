@@ -2,15 +2,12 @@ import { Component, ChangeDetectionStrategy, Input, forwardRef } from '@angular/
 import { ControlValueAccessor, FormControl, Validator } from '@angular/forms';
 import { NG_VALUE_ACCESSOR, NG_VALIDATORS } from '@angular/forms';
 
-import { ICourse } from '../../../core/entities';
-
-const DATE_REGEXP = new RegExp('\\d{2}\\/\\d{2}\\/\\d{4}');
+const DATE_REGEXP = new RegExp('\\d{1,2}\\/\\d{1,2}\\/\\d{4}');
 
 @Component({
   selector: 'date-field',
   templateUrl: './date-field.component.html',
   styleUrls: ['./date-field.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -25,10 +22,17 @@ const DATE_REGEXP = new RegExp('\\d{2}\\/\\d{2}\\/\\d{4}');
   ],
 })
 export class DateFieldComponent implements ControlValueAccessor, Validator {
+  public dateString: string;
+
   private propagateChange = (_) => {};
   private propagateTouch = () => {};
 
-  public writeValue(obj: any): void {
+  public writeValue(obj: Date): void {
+    if (obj != null) {
+      this.dateString = `${obj.getDay()}/${obj.getMonth()+1}/${obj.getFullYear()}`;
+
+      this.propagateChange(obj);
+    }
   }
 
   public registerOnChange(fn: any): void {
@@ -39,15 +43,13 @@ export class DateFieldComponent implements ControlValueAccessor, Validator {
     this.propagateTouch = fn;
   }
 
-  public onChange(event) {
-    const value = event.target.value;
+  public onChange(value) {
     if (!DATE_REGEXP.test(value)) {
       this.propagateChange(null);
-      return;
+    } else {
+      const dateParts = value.split('/');
+      this.propagateChange(new Date(dateParts[2], dateParts[1] - 1, dateParts[0]));
     }
-
-    const dateParts = value.split('/');
-    this.propagateChange(new Date(dateParts[2], dateParts[1] - 1, dateParts[0]));
   }
 
   public onBlur() {

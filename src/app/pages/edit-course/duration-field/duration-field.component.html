@@ -1,11 +1,10 @@
-<label for="duration">Duration</label>
 <div class="duration-row">
   <input
-      id="duration"
-      name="duration"
-      [(ngModel)]="course.durationMin"
-      type="number"
+      type="text"
       class="form-control"
+      [(ngModel)]="duration"
+      (ngModelChange)="onChange($event)"
+      (blur)="onBlur()"
       required>
-  {{ course.durationMin | duration }}
+  {{ duration | duration }}
 </div>

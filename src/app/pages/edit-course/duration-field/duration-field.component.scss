@@ -3,7 +3,11 @@
   line-height: 34px;
 }
 
-#duration {
+input {
   width: 80px;
   margin-right: 20px;
+}
+
+input.ng-invalid.ng-touched {
+  border: 1px solid red;
 }
