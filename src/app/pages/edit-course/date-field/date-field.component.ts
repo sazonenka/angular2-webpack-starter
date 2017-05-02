@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy, Input, forwardRef } from '@angular/
 import { ControlValueAccessor, FormControl, Validator } from '@angular/forms';
 import { NG_VALUE_ACCESSOR, NG_VALIDATORS } from '@angular/forms';
 
-const DATE_REGEXP = new RegExp('\\d{1,2}\\/\\d{1,2}\\/\\d{4}');
+const DATE_REGEXP = new RegExp('^\\d{1,2}\\/\\d{1,2}\\/\\d{4}$');
 
 @Component({
   selector: 'date-field',

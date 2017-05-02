@@ -15,6 +15,6 @@ export class DurationPipe implements PipeTransform {
     if (hours > 0) {
       return `${hours}h ${minutes}min`;
     }
-    return `${minutes}min`;
+    return !isNaN(minutes) ? `${minutes}min` : '';
   }
 }

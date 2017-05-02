@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy, Input, forwardRef } from '@angular/
 import { ControlValueAccessor, FormControl, Validator } from '@angular/forms';
 import { NG_VALUE_ACCESSOR, NG_VALIDATORS } from '@angular/forms';
 
-const DURATION_REGEXP = new RegExp('\\d+');
+const DURATION_REGEXP = new RegExp('^\\d+$');
 
 @Component({
   selector: 'duration-field',
