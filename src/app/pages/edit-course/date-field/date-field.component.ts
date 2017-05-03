@@ -29,7 +29,7 @@ export class DateFieldComponent implements ControlValueAccessor, Validator {
 
   public writeValue(obj: Date): void {
     if (obj != null) {
-      this.dateString = `${obj.getDay()}/${obj.getMonth()+1}/${obj.getFullYear()}`;
+      this.dateString = `${obj.getDate()}/${obj.getMonth()+1}/${obj.getFullYear()}`;
 
       this.propagateChange(obj);
     }

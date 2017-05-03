@@ -5,6 +5,7 @@ export interface ICourse {
   date: Date;
   durationMin: number;
   topRated: boolean;
+  authors: number[];
 }
 
 export class Course implements ICourse {
@@ -14,7 +15,8 @@ export class Course implements ICourse {
     public description: string,
     public date: Date,
     public durationMin: number,
-    public topRated: boolean
+    public topRated: boolean,
+    public authors: number[]
   ) { }
 }
 

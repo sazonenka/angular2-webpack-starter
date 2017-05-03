@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Response, URLSearchParams } from '@angular/http';
+import { Response, URLSearchParams, Headers } from '@angular/http';
 
 import { Observable } from 'rxjs';
 
 import { HttpService } from './http.service';
-import { Course, ListCoursesResponse } from '../entities';
+import { ICourse, Course, ListCoursesResponse } from '../entities';
 import { Author } from '../entities';
 
 @Injectable()
@@ -27,7 +27,8 @@ export class CoursesService {
               course.description,
               new Date(course.date),
               course.length,
-              course.isTopRated)),
+              course.isTopRated,
+              course.authors.map(author => author.id))),
             result.total
           );
         });
@@ -43,6 +44,57 @@ export class CoursesService {
               author.lastName
           ));
         });
+  }
+
+  public getCourse(courseId: string): Observable<ICourse> {
+    return this.httpService.get(`/courses/${courseId}`)
+        .map((resp: Response) => {
+          const result = resp.json();
+          return new Course(
+            result.id,
+            result.name,
+            result.description,
+            new Date(result.date),
+            result.length,
+            result.isTopRated,
+            result.authors.map(author => author.id)
+          );
+        });
+  }
+
+  public createCourse(course: ICourse): Observable<any> {
+    let requestBody = {
+      name: course.title,
+      description: course.description,
+      isTopRated: course.topRated,
+      date: course.date.toUTCString(),
+      length: course.durationMin,
+      authors: course.authors.map(author => ({id: author}))
+    };
+
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+
+    return this.httpService.post('/courses', requestBody, {headers: headers})
+        .map((resp: Response) => resp.json());
+  }
+
+  public updateCourse(course: ICourse): Observable<any> {
+    let requestBody = {
+      id: course.id,
+      name: course.title,
+      description: course.description,
+      isTopRated: course.topRated,
+      date: course.date.toUTCString(),
+      length: course.durationMin,
+      authors: course.authors.map(author => ({id: author}))
+    };
+
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+
+    return this.httpService.put(`/courses/${course.id}`, requestBody, {headers: headers})
+        .map((resp: Response) => resp.json());
   }
 
   public deleteCourse(courseId: string): Observable<any> {

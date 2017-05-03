@@ -25,6 +25,7 @@ export class AuthorsFieldComponent implements ControlValueAccessor, Validator {
   @Input()
   public authors: Author[];
 
+  public selectedIdsObject: any = {};
   public selectedIds: number[] = [];
   public touched: boolean = false;
 
@@ -32,6 +33,13 @@ export class AuthorsFieldComponent implements ControlValueAccessor, Validator {
   private propagateTouch = () => {};
 
   public writeValue(obj: any): void {
+    if (obj != null) {
+      obj.forEach(id => {
+        this.selectedIdsObject[id] = true;
+      });
+      this.selectedIds = obj;
+      this.propagateChange(obj);
+    }
   }
 
   public registerOnChange(fn: any): void {
