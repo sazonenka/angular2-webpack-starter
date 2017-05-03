@@ -1,8 +1,5 @@
-import {
-  Component,
-  ChangeDetectionStrategy,
-  OnInit,
-} from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Observable } from 'rxjs';
 
@@ -17,7 +14,9 @@ import { AuthService } from '../../../services';
 export class LogoffComponent implements OnInit {
   public login: Observable<string>;
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router) {}
 
   public ngOnInit() {
     this.login = this.authService.getUserInfo();
@@ -25,5 +24,6 @@ export class LogoffComponent implements OnInit {
 
   public logoff(): void {
     this.authService.logout();
+    this.router.navigateByUrl('/login');
   }
 }

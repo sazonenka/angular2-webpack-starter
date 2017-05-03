@@ -5,9 +5,12 @@ import { LoginComponent } from './pages/login';
 import { NoContentComponent } from './pages/no-content';
 
 export const ROUTES: Routes = [
-  { path: '', component: CoursesComponent },
-  { path: 'courses', component: CoursesComponent },
-  { path: 'edit-course', component: EditCourseComponent },
-  { path: 'login', component: LoginComponent },
+  { path: '', redirectTo: 'courses', pathMatch: 'full' },
+
+  { path: 'courses', component: CoursesComponent, pathMatch: 'full' },
+  { path: 'courses/:id', component: EditCourseComponent, pathMatch: 'full' },
+
+  { path: 'login', component: LoginComponent, pathMatch: 'full' },
+
   { path: '**', component: NoContentComponent },
 ];

@@ -1,12 +1,7 @@
 import { Injectable } from '@angular/core';
-
 import { Response } from '@angular/http';
 
-import {
-  Observable,
-  BehaviorSubject,
-  ReplaySubject,
-} from 'rxjs';
+import { Observable, BehaviorSubject, ReplaySubject } from 'rxjs';
 
 import { HttpService } from './http.service';
 
@@ -22,15 +17,19 @@ export class AuthService {
     return this.loginSubject.asObservable();
   }
 
-  public login(login: string, password: string): void {
-    this.httpService.post('/auth/login', {
+  public login(login: string, password: string): Observable<boolean> {
+    let requestBody = {
       login: login,
       password: password,
-    }).toPromise().then((resp: Response) => {
-      localStorage.setItem('token', resp.json().token);
-      this.isAuthSubject.next(true);
-      this.loginSubject.next(login);
-    }).catch((error) => console.log(error.status, error.statusText));
+    };
+    return this.httpService.post('/auth/login', requestBody)
+        .map((resp: Response) => {
+          localStorage.setItem('token', resp.json().token);
+          this.isAuthSubject.next(true);
+          this.loginSubject.next(login);
+
+          return true;
+        });
   }
 
   public logout(): void {
