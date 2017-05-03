@@ -4,7 +4,7 @@ import { NgForm } from '@angular/forms';
 
 import { Subscription } from 'rxjs';
 
-import { CoursesService } from '../../core/services';
+import { CoursesService, BreadcrumbsService } from '../../core/services';
 
 import { ICourse, Author } from '../../core/entities';
 
@@ -23,6 +23,7 @@ export class EditCourseComponent implements OnInit, OnDestroy {
 
   constructor(
     private coursesService: CoursesService,
+    private breadcrumbsService: BreadcrumbsService,
     private cd: ChangeDetectorRef,
     private route: ActivatedRoute,
     private router: Router) {}
@@ -36,6 +37,7 @@ export class EditCourseComponent implements OnInit, OnDestroy {
             .toPromise()
             .then((course: ICourse) => {
               this.course = course;
+              this.titleChanged(course.title);
               this.cd.markForCheck();
             });
       }
@@ -46,6 +48,10 @@ export class EditCourseComponent implements OnInit, OnDestroy {
           this.authors = authors;
           this.cd.markForCheck();
         });
+  }
+
+  public titleChanged(newTitle: string): void {
+    this.breadcrumbsService.setCourseTitle(newTitle);
   }
 
   public submit() {
@@ -65,6 +71,7 @@ export class EditCourseComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy() {
+    this.breadcrumbsService.setCourseTitle(undefined);
     this.routeParamsSubscription.unsubscribe();
   }
 }

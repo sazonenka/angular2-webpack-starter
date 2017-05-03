@@ -6,6 +6,7 @@
           name="title"
           #title="ngModel"
           [(ngModel)]="course.title"
+          (ngModelChange)="titleChanged($event)"
           type="text"
           class="form-control"
           required

@@ -1,5 +1,6 @@
 <div class="breadcrumbs">
   <i>
-    Courses > ...
+    <a routerLink="/courses">Courses</a>
+    <span *ngIf="courseTitle | async">> {{ courseTitle | async }}</span>
   </i>
 </div>

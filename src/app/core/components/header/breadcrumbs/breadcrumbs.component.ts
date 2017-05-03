@@ -1,7 +1,8 @@
-import {
-  Component,
-  ChangeDetectionStrategy,
-} from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
+
+import { Observable } from 'rxjs';
+
+import { BreadcrumbsService } from '../../../services';
 
 @Component({
   selector: 'breadcrumbs',
@@ -9,5 +10,12 @@ import {
   styleUrls: ['./breadcrumbs.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BreadcrumbsComponent {
+export class BreadcrumbsComponent implements OnInit {
+  public courseTitle: Observable<string>;
+
+  constructor(private breadcrumbsService: BreadcrumbsService) {}
+
+  public ngOnInit() {
+    this.courseTitle = this.breadcrumbsService.getCourseTitle();
+  }
 }
