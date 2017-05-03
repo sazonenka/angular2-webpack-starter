@@ -40,6 +40,7 @@ import { ToolboxComponent } from './core/components/toolbox';
 
 // Page Components
 import { CourseItemComponent } from './pages/courses';
+import { AuthorsFieldComponent } from './pages/edit-course';
 import { DateFieldComponent } from './pages/edit-course';
 import { DurationFieldComponent } from './pages/edit-course';
 
@@ -86,6 +87,7 @@ const APP_PROVIDERS = [
     ToolboxComponent,
 
     CourseItemComponent,
+    AuthorsFieldComponent,
     DateFieldComponent,
     DurationFieldComponent,
 

@@ -15,7 +15,7 @@
           Title is required
         </div>
         <div [hidden]="!title.errors.maxlength">
-          Title cannot be more than 50 characters long.
+          Title cannot be more than 50 characters long
         </div>
       </div>
     </div>
@@ -34,7 +34,7 @@
           Description is required
         </div>
         <div [hidden]="!description.errors.maxlength">
-          Description cannot be more than 500 characters long.
+          Description cannot be more than 500 characters long
         </div>
       </div>
     </div>
@@ -44,7 +44,7 @@
       <date-field name="date" #date="ngModel" [(ngModel)]="course.date"></date-field>
       <div *ngIf="date.invalid && date.touched" class="error-messages">
         <div [hidden]="!date.errors.invalidDate">
-          Date should be in 'dd/MM/yyyy' format.
+          Date must be in 'dd/MM/yyyy' format
         </div>
       </div>
     </div>
@@ -54,10 +54,25 @@
       <duration-field name="duration" #duration="ngModel" [(ngModel)]="course.durationMin"></duration-field>
       <div *ngIf="duration.invalid && duration.touched" class="error-messages">
         <div [hidden]="!duration.errors.invalidDuration">
-          Duration is required and should contain digits only.
+          Duration is required and must contain digits only
         </div>
       </div>
     </div>
+
+    <div class="form-group">
+      <label for="authors">Authors</label>
+      <authors-field
+          name="authors"
+          #authorsWidget="ngModel"
+          [(ngModel)]="course.authors"
+          [authors]="authors"></authors-field>
+      <div *ngIf="authorsWidget.invalid && authorsWidget.touched" class="error-messages">
+        <div [hidden]="!authorsWidget.errors.invalidAuthors">
+          At least one author must be selected
+        </div>
+      </div>
+    </div>
+
     <button
         type="submit"
         [disabled]="form.pristine || form.invalid"

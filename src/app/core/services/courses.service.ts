@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 
 import { HttpService } from './http.service';
 import { Course, ListCoursesResponse } from '../entities';
+import { Author } from '../entities';
 
 @Injectable()
 export class CoursesService {
@@ -29,6 +30,18 @@ export class CoursesService {
               course.isTopRated)),
             result.total
           );
+        });
+  }
+
+  public listAuthors(): Observable<Author[]> {
+    return this.httpService.get('/courses/authors')
+        .map((resp: Response) => {
+          const result = resp.json();
+          return result.map((author) => new Author(
+              author.id,
+              author.firstName,
+              author.lastName
+          ));
         });
   }
 

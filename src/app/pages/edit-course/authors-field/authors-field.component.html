@@ -1,0 +1,10 @@
+<div class="authors-list">
+  <div *ngFor="let author of authors">
+    <label>
+      <input
+          type="checkbox"
+          (change)="onChange(author.id, $event.target.checked)">
+      {{author.firstName}} {{author.lastName}}
+    </label>
+  </div>
+</div>
