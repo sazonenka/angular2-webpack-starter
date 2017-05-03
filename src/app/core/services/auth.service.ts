@@ -7,7 +7,7 @@ import { HttpService } from './http.service';
 
 @Injectable()
 export class AuthService {
-  private isAuthSubject = new BehaviorSubject<boolean>(false);
+  public isAuthSubject = new BehaviorSubject<boolean>(false);
   private loginSubject = new ReplaySubject<string>(1);
 
   public constructor(private httpService: HttpService) {

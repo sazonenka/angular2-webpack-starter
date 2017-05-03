@@ -53,6 +53,7 @@ import { FilterPipe } from './core/pipes';
 import { OrderByPipe } from './core/pipes';
 
 // Services
+import { AuthGuard } from './core/services';
 import { AuthService } from './core/services';
 import { CoursesService } from './core/services';
 import { HttpService } from './core/services';
@@ -107,6 +108,7 @@ const APP_PROVIDERS = [
     ENV_PROVIDERS,
     APP_PROVIDERS,
     FilterPipe,
+    AuthGuard,
     AuthService,
     CoursesService,
     HttpService,

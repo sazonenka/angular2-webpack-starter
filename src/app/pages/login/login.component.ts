@@ -31,6 +31,6 @@ export class LoginComponent {
             this.loaderService.hide();
             console.log(e.statusText);
           });
-    }, 3000);
+    }, 1000);
   }
 }

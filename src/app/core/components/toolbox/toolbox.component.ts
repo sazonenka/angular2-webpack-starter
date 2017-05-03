@@ -1,9 +1,5 @@
-import {
-  Component,
-  ChangeDetectionStrategy,
-  EventEmitter,
-  Output,
-} from '@angular/core';
+import { Component, ChangeDetectionStrategy, EventEmitter, Output } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'toolbox',
@@ -17,11 +13,13 @@ export class ToolboxComponent {
 
   public searchTerm = '';
 
+  constructor(private router: Router) {}
+
   public findCourses() {
     this.coursesFiltered.emit(this.searchTerm);
   }
 
   public addCourse() {
-    console.log('Add Course button clicked!');
+    this.router.navigateByUrl('/courses/new');
   }
 }

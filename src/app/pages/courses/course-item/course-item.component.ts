@@ -1,10 +1,5 @@
-import {
-  Component,
-  ChangeDetectionStrategy,
-  Input,
-  Output,
-  EventEmitter,
-} from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { ICourse } from '../../../core/entities';
 
@@ -23,6 +18,12 @@ export class CourseItemComponent {
 
   @Output()
   public courseDeleted = new EventEmitter();
+
+  constructor(private router: Router) {}
+
+  public editCourse() {
+    this.router.navigateByUrl(`/courses/${this.item.id}`);
+  }
 
   public deleteCourse() {
     this.courseDeleted.emit(this.item.id);
