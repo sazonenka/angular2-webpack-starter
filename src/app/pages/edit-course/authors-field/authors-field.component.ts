@@ -29,12 +29,9 @@ export class AuthorsFieldComponent implements ControlValueAccessor, Validator {
   public selectedIds: number[] = [];
   public touched: boolean = false;
 
-  private propagateChange = (_) => {};
-  private propagateTouch = () => {};
-
   public writeValue(obj: any): void {
     if (obj != null) {
-      obj.forEach(id => {
+      obj.forEach((id) => {
         this.selectedIdsObject[id] = true;
       });
       this.selectedIds = obj;
@@ -64,8 +61,11 @@ export class AuthorsFieldComponent implements ControlValueAccessor, Validator {
   }
 
   public validate(c: FormControl) {
-    return this.touched && this.selectedIds.length == 0 ?
+    return this.touched && this.selectedIds.length === 0 ?
         { invalidAuthors: true } :
         null;
   }
+
+  private propagateChange = (_) => {/* tslint:disable *//* tslint:enable */};
+  private propagateTouch = () => {/* tslint:disable *//* tslint:enable */};
 }

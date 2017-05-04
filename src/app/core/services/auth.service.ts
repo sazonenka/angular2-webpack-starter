@@ -18,11 +18,7 @@ export class AuthService {
   }
 
   public login(login: string, password: string): Observable<boolean> {
-    let requestBody = {
-      login: login,
-      password: password,
-    };
-    return this.httpService.post('/auth/login', requestBody)
+    return this.httpService.post('/auth/login', {login, password})
         .map((resp: Response) => {
           localStorage.setItem('token', resp.json().token);
           this.isAuthSubject.next(true);

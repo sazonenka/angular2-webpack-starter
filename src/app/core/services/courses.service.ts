@@ -11,7 +11,8 @@ import { Author } from '../entities';
 export class CoursesService {
   public constructor(private httpService: HttpService) {}
 
-  public listCourses(searchTerm: string, start: number, count: number): Observable<ListCoursesResponse> {
+  public listCourses(searchTerm: string, start: number, count: number):
+      Observable<ListCoursesResponse> {
     let params = new URLSearchParams();
     params.set('query', searchTerm);
     params.set('start', start.toString());
@@ -28,7 +29,7 @@ export class CoursesService {
               new Date(course.date),
               course.length,
               course.isTopRated,
-              course.authors.map(author => author.id))),
+              course.authors.map((author) => author.id))),
             result.total
           );
         });
@@ -57,7 +58,7 @@ export class CoursesService {
             new Date(result.date),
             result.length,
             result.isTopRated,
-            result.authors.map(author => author.id)
+            result.authors.map((author) => author.id)
           );
         });
   }
@@ -69,13 +70,13 @@ export class CoursesService {
       isTopRated: course.topRated,
       date: course.date.toUTCString(),
       length: course.durationMin,
-      authors: course.authors.map(author => ({id: author}))
+      authors: course.authors.map((author) => ({id: author}))
     };
 
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
 
-    return this.httpService.post('/courses', requestBody, {headers: headers})
+    return this.httpService.post('/courses', requestBody, {headers})
         .map((resp: Response) => resp.json());
   }
 
@@ -87,13 +88,13 @@ export class CoursesService {
       isTopRated: course.topRated,
       date: course.date.toUTCString(),
       length: course.durationMin,
-      authors: course.authors.map(author => ({id: author}))
+      authors: course.authors.map((author) => ({id: author}))
     };
 
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
 
-    return this.httpService.put(`/courses/${course.id}`, requestBody, {headers: headers})
+    return this.httpService.put(`/courses/${course.id}`, requestBody, {headers})
         .map((resp: Response) => resp.json());
   }
 

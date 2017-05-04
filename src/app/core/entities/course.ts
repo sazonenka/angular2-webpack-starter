@@ -19,10 +19,3 @@ export class Course implements ICourse {
     public authors: number[]
   ) { }
 }
-
-export class ListCoursesResponse {
-  constructor(
-    public courses: ICourse[],
-    public total: number
-  ) { }
-}

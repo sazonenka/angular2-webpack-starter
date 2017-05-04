@@ -24,12 +24,9 @@ const DATE_REGEXP = new RegExp('^\\d{1,2}\\/\\d{1,2}\\/\\d{4}$');
 export class DateFieldComponent implements ControlValueAccessor, Validator {
   public dateString: string;
 
-  private propagateChange = (_) => {};
-  private propagateTouch = () => {};
-
   public writeValue(obj: Date): void {
     if (obj != null) {
-      this.dateString = `${obj.getDate()}/${obj.getMonth()+1}/${obj.getFullYear()}`;
+      this.dateString = `${obj.getDate()}/${obj.getMonth() + 1}/${obj.getFullYear()}`;
 
       this.propagateChange(obj);
     }
@@ -59,4 +56,7 @@ export class DateFieldComponent implements ControlValueAccessor, Validator {
   public validate(c: FormControl) {
     return c.value != null ? null : { invalidDate: true };
   }
+
+  private propagateChange = (_) => {/* tslint:disable *//* tslint:enable */};
+  private propagateTouch = () => {/* tslint:disable *//* tslint:enable */};
 }

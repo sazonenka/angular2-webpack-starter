@@ -23,7 +23,7 @@ export class LoginComponent {
     setTimeout(() => {
       this.authService.login(this.login, this.password)
           .toPromise()
-          .then(success => {
+          .then((success) => {
             this.loaderService.hide();
             this.router.navigateByUrl('/courses');
           })

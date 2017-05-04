@@ -24,9 +24,6 @@ const DURATION_REGEXP = new RegExp('^\\d+$');
 export class DurationFieldComponent implements ControlValueAccessor, Validator {
   public duration: number;
 
-  private propagateChange = (_) => {};
-  private propagateTouch = () => {};
-
   public writeValue(obj: number): void {
     if (obj != null) {
       this.duration = obj;
@@ -53,4 +50,7 @@ export class DurationFieldComponent implements ControlValueAccessor, Validator {
   public validate(c: FormControl) {
     return c.value != null ? null : { invalidDuration: true };
   }
+
+  private propagateChange = (_) => {/* tslint:disable *//* tslint:enable */};
+  private propagateTouch = () => {}/* tslint:disable *//* tslint:enable */;
 }
