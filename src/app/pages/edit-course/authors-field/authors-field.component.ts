@@ -26,15 +26,15 @@ export class AuthorsFieldComponent implements ControlValueAccessor, Validator {
   public authors: Author[];
 
   public selectedIdsObject: any = {};
-  public selectedIds: number[] = [];
+  public selectedAuthors: Author[] = [];
   public touched: boolean = false;
 
   public writeValue(obj: any): void {
     if (obj != null) {
-      obj.forEach((id) => {
-        this.selectedIdsObject[id] = true;
+      obj.forEach((a: Author) => {
+        this.selectedIdsObject[a.id] = true;
       });
-      this.selectedIds = obj;
+      this.selectedAuthors = obj;
       this.propagateChange(obj);
     }
   }
@@ -47,21 +47,21 @@ export class AuthorsFieldComponent implements ControlValueAccessor, Validator {
     this.propagateTouch = fn;
   }
 
-  public onChange(authorId: number, checked: boolean) {
+  public onChange(author: Author, checked: boolean) {
     this.touched = true;
     this.propagateTouch();
 
     if (checked) {
-      this.selectedIds.push(authorId);
+      this.selectedAuthors.push(author);
     } else {
-      const indexToDelete = this.selectedIds.findIndex((itemId: number) => itemId === authorId);
-      this.selectedIds.splice(indexToDelete, 1);
+      const indexToDelete = this.selectedAuthors.findIndex((a: Author) => a.id === author.id);
+      this.selectedAuthors.splice(indexToDelete, 1);
     }
-    this.propagateChange(this.selectedIds);
+    this.propagateChange(this.selectedAuthors);
   }
 
   public validate(c: FormControl) {
-    return this.touched && this.selectedIds.length === 0 ?
+    return this.selectedAuthors.length === 0 ?
         { invalidAuthors: true } :
         null;
   }

@@ -56,6 +56,7 @@ export class EditCourseComponent implements OnInit, OnDestroy {
   }
 
   public submit() {
+    console.log('submit', this.course);
     if (this.isNew) {
       this.coursesService.createCourse(this.course)
           .toPromise()

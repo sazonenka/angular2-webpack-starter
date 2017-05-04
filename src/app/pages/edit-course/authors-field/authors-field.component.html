@@ -4,7 +4,7 @@
       <input
           type="checkbox"
           [(ngModel)]="selectedIdsObject[author.id]"
-          (change)="onChange(author.id, $event.target.checked)">
+          (change)="onChange(author, $event.target.checked)">
       {{author.firstName}} {{author.lastName}}
     </label>
   </div>

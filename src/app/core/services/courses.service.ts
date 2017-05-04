@@ -29,7 +29,7 @@ export class CoursesService {
               new Date(course.date),
               course.length,
               course.isTopRated,
-              course.authors.map((author) => author.id))),
+              course.authors)),
             result.total
           );
         });
@@ -39,11 +39,19 @@ export class CoursesService {
     return this.httpService.get('/courses/authors')
         .map((resp: Response) => {
           const result = resp.json();
-          return result.map((author) => new Author(
-              author.id,
-              author.firstName,
-              author.lastName
-          ));
+
+          // Remove duplicates.
+          let authorsObj = result.reduce((obj, author) => {
+            obj[author.id] = author;
+            return obj;
+          }, {});
+          // Sort for stability.
+          let authorIds = Object.keys(authorsObj).sort();
+
+          return authorIds.map((authorId) => {
+            let author = authorsObj[authorId];
+            return new Author(author.id, author.firstName, author.lastName);
+          });
         });
   }
 
@@ -58,7 +66,7 @@ export class CoursesService {
             new Date(result.date),
             result.length,
             result.isTopRated,
-            result.authors.map((author) => author.id)
+            result.authors,
           );
         });
   }
@@ -70,7 +78,7 @@ export class CoursesService {
       isTopRated: course.topRated,
       date: course.date.toUTCString(),
       length: course.durationMin,
-      authors: course.authors.map((author) => ({id: author}))
+      authors: course.authors
     };
 
     let headers = new Headers();
@@ -88,7 +96,7 @@ export class CoursesService {
       isTopRated: course.topRated,
       date: course.date.toUTCString(),
       length: course.durationMin,
-      authors: course.authors.map((author) => ({id: author}))
+      authors: course.authors
     };
 
     let headers = new Headers();

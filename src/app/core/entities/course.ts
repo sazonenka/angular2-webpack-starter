@@ -1,3 +1,5 @@
+import { Author } from './author';
+
 export interface ICourse {
   id: number;
   title: string;
@@ -5,7 +7,7 @@ export interface ICourse {
   date: Date;
   durationMin: number;
   topRated: boolean;
-  authors: number[];
+  authors: Author[];
 }
 
 export class Course implements ICourse {
@@ -16,6 +18,6 @@ export class Course implements ICourse {
     public date: Date,
     public durationMin: number,
     public topRated: boolean,
-    public authors: number[]
+    public authors: Author[]
   ) { }
 }
