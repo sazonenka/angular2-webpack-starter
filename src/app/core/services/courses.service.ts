@@ -1,18 +1,29 @@
 import { Injectable } from '@angular/core';
 import { Response, URLSearchParams, Headers } from '@angular/http';
 
+import { Action, Store } from '@ngrx/store';
+
 import { Observable } from 'rxjs';
 
 import { HttpService } from './http.service';
+
+import { AppState } from '../entities';
 import { ICourse, Course, ListCoursesResponse } from '../entities';
 import { Author } from '../entities';
 
 @Injectable()
 export class CoursesService {
-  public constructor(private httpService: HttpService) {}
+  public courses: Observable<ICourse[]>;
+  public authors: Observable<Author[]>;
 
-  public listCourses(searchTerm: string, start: number, count: number):
-      Observable<ListCoursesResponse> {
+  public constructor(
+    private httpService: HttpService,
+    private store: Store<AppState>) {
+      this.courses = store.select((store) => store.courses);
+      this.authors = store.select((store) => store.authors);
+    }
+
+  public listCourses(searchTerm: string, start: number, count: number) {
     let params = new URLSearchParams();
     params.set('query', searchTerm);
     params.set('start', start.toString());
@@ -21,21 +32,24 @@ export class CoursesService {
     return this.httpService.get('/courses', {search: params})
         .map((resp: Response) => {
           const result = resp.json();
-          return new ListCoursesResponse(
-            result.courses.map((course) => new Course(
+          return result.courses.map((course) => new Course(
               course.id,
               course.name,
               course.description,
               new Date(course.date),
               course.length,
               course.isTopRated,
-              course.authors)),
-            result.total
-          );
+              course.authors));
+        })
+        .map((payload: ICourse[]) => {
+          return { type: 'LOAD_COURSES', payload };
+        })
+        .subscribe((action: Action) => {
+          this.store.dispatch(action);
         });
   }
 
-  public listAuthors(): Observable<Author[]> {
+  public listAuthors() {
     return this.httpService.get('/courses/authors')
         .map((resp: Response) => {
           const result = resp.json();
@@ -52,6 +66,12 @@ export class CoursesService {
             let author = authorsObj[authorId];
             return new Author(author.id, author.firstName, author.lastName);
           });
+        })
+        .map((payload: Author[]) => {
+          return { type: 'LOAD_AUTHORS', payload };
+        })
+        .subscribe((action: Action) => {
+          this.store.dispatch(action);
         });
   }
 

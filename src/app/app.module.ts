@@ -15,6 +15,8 @@ import {
   PreloadAllModules
 } from '@angular/router';
 
+import { StoreModule } from '@ngrx/store';
+
 /*
  * Platform and Environment providers/directives/pipes
  */
@@ -60,6 +62,10 @@ import { CoursesService } from './core/services';
 import { HttpService } from './core/services';
 import { LoaderBlockService } from './core/services';
 
+// Reducers
+import { authorReducer } from './core/reducers';
+import { courseReducer } from './core/reducers';
+
 import '../styles/styles.scss';
 import '../styles/headings.css';
 
@@ -104,6 +110,10 @@ const APP_PROVIDERS = [
     FormsModule,
     HttpModule,
     RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
+    StoreModule.provideStore({
+      authors: authorReducer,
+      courses: courseReducer,
+    }),
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,

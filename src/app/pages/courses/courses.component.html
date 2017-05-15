@@ -1,12 +1,12 @@
 <div class="container">
   <toolbox (coursesFiltered)="setSearchTerm($event)"></toolbox>
   <course-item
-      *ngFor="let courseItem of courseItems | orderBy:'date'; let idx = index"
+      *ngFor="let courseItem of courseItems | async | orderBy:'date'; let idx = index"
       [item]="courseItem"
       [index]="idx"
       (courseDeleted)="deleteCourse($event)"></course-item>
 
-  <div *ngIf="courseItemsEmpty()" class="no-courses-panel">
+  <div *ngIf="(courseItems | async).length == 0" class="no-courses-panel">
     No data. Feel free to add a new course.
   </div>
 </div>

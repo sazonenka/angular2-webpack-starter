@@ -7,14 +7,10 @@ import {
   NgZone
 } from '@angular/core';
 
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
-import { ICourse, ListCoursesResponse } from '../../core/entities';
-import { FilterPipe } from '../../core/pipes';
-import {
-  CoursesService,
-  LoaderBlockService,
-} from '../../core/services';
+import { ICourse } from '../../core/entities';
+import { CoursesService, LoaderBlockService } from '../../core/services';
 
 @Component({
   selector: 'courses',
@@ -23,21 +19,18 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CoursesComponent implements OnInit, OnDestroy {
-  public courseItems: ICourse[] = [];
-  public total: number = 0;
+  public courseItems: Observable<ICourse[]>;
 
   private titleFragment: string;
 
   private startTime: Date;
 
-  private listCoursesSubscription: Subscription;
   private onUnstableSubscription: Subscription;
   private onStableSubscription: Subscription;
 
   constructor(
       private coursesService: CoursesService,
       private loaderService: LoaderBlockService,
-      private filterPipe: FilterPipe,
       private cd: ChangeDetectorRef,
       private ngZone: NgZone) {}
 
@@ -56,10 +49,6 @@ export class CoursesComponent implements OnInit, OnDestroy {
     this.listCourses();
   }
 
-  public courseItemsEmpty(): boolean {
-    return this.courseItems.length === 0;
-  }
-
   public deleteCourse(id: string): void {
     if (window.confirm('Do you really want to delete the course?')) {
       this.loaderService.show();
@@ -74,36 +63,21 @@ export class CoursesComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy() {
-    this.listCoursesSubscription.unsubscribe();
     this.onUnstableSubscription.unsubscribe();
     this.onStableSubscription.unsubscribe();
   }
 
   private listCourses(): void {
-    if (this.listCoursesSubscription) {
-      this.listCoursesSubscription.unsubscribe();
-    }
-
-    this.listCoursesSubscription =
-        this.coursesService.listCourses(this.titleFragment, 0, 20)
-            .map(this.filterOutdatedCourses, this)
-            .subscribe((resp: ListCoursesResponse) => {
-              this.courseItems = resp.courses;
-              this.total = resp.total;
-
-              this.cd.markForCheck();
-            });
+    this.courseItems = this.coursesService.courses;
+    this.coursesService.listCourses(this.titleFragment, 0, 20);
   }
 
-  private filterOutdatedCourses(resp: ListCoursesResponse): ListCoursesResponse {
-    return new ListCoursesResponse(
-      resp.courses.filter((course) => {
-        let now = new Date();
-        let diffDays = (now.getTime() - course.date.getTime()) / (1000 * 60 * 60 * 24);
-        return diffDays < 14;
-      }),
-      resp.total
-    );
+  private filterOutdatedCourses(courses: ICourse[]): ICourse[] {
+    return courses.filter((course) => {
+      let now = new Date();
+      let diffDays = (now.getTime() - course.date.getTime()) / (1000 * 60 * 60 * 24);
+      return diffDays < 14;
+    });
   }
 
   private onZoneUnstable(): void {

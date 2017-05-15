@@ -3,7 +3,7 @@ import { OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 import { CoursesService, BreadcrumbsService } from '../../core/services';
 
@@ -18,7 +18,7 @@ import { ICourse, Author } from '../../core/entities';
 export class EditCourseComponent implements OnInit, OnDestroy {
   public isNew: boolean = true;
   public course: ICourse = <ICourse> {};
-  public authors: Author[] = [];
+  public authors: Observable<Author[]>;
 
   private routeParamsSubscription: Subscription;
 
@@ -43,12 +43,9 @@ export class EditCourseComponent implements OnInit, OnDestroy {
             });
       }
     });
-    this.coursesService.listAuthors()
-        .toPromise()
-        .then((authors: Author[]) => {
-          this.authors = authors;
-          this.cd.markForCheck();
-        });
+
+    this.authors = this.coursesService.authors;
+    this.coursesService.listAuthors();
   }
 
   public titleChanged(newTitle: string): void {
