@@ -19,8 +19,8 @@ export class CoursesService {
   public constructor(
     private httpService: HttpService,
     private store: Store<AppState>) {
-      this.courses = store.select((store) => store.courses);
-      this.authors = store.select((store) => store.authors);
+      this.courses = store.select((st) => st.courses);
+      this.authors = store.select((st) => st.authors);
     }
 
   public listCourses(searchTerm: string, start: number, count: number) {
