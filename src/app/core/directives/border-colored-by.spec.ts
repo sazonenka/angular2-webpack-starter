@@ -33,7 +33,7 @@ describe('BorderColoredByDirective', () => {
 
   it('should set blue border for upcoming dates', () => {
     const now = new Date();
-    const tomorrow = new Date(now.getTime() + 24*60*60*1000);
+    const tomorrow = new Date(now.getTime() + 24 * 60 * 60 * 1000);
 
     instance.date = tomorrow;
     fixture.detectChanges();
@@ -44,7 +44,7 @@ describe('BorderColoredByDirective', () => {
 
   it('should set green border for fresh dates', () => {
     const now = new Date();
-    const weekAgo = new Date(now.getTime() - 7*24*60*60*1000);
+    const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
 
     instance.date = weekAgo;
     fixture.detectChanges();
@@ -55,7 +55,7 @@ describe('BorderColoredByDirective', () => {
 
   it('should not change border color for old dates', () => {
     const now = new Date();
-    const threeWeeksAgo = new Date(now.getTime() - 21*24*60*60*1000);
+    const threeWeeksAgo = new Date(now.getTime() - 21 * 24 * 60 * 60 * 1000);
 
     instance.date = threeWeeksAgo;
     fixture.detectChanges();
