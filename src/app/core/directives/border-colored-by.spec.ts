@@ -5,7 +5,7 @@ import { By } from '@angular/platform-browser';
 
 import { BorderColoredByDirective } from './border-colored-by';
 
-describe('BorderColoredByDirective directive', () => {
+describe('BorderColoredByDirective', () => {
   let fixture: ComponentFixture<TestComponent>;
   let instance: TestComponent;
 

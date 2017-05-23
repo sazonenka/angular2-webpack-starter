@@ -1,6 +1,6 @@
 import { DurationPipe } from './duration';
 
-describe('Duration pipe', () => {
+describe('DurationPipe', () => {
   let pipe = new DurationPipe();
 
   it('should return empty string for undefined/null duration', () => {
